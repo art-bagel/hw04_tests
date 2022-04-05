@@ -62,7 +62,7 @@ class PostFormTests(TestCase):
         response = self.authorized_client.post(
             reverse('posts:post_edit', args=[self.post.id]),
             data=form_data
-            )
+        )
         modified_post = Post.objects.get(id=self.post.id)
         self.assertNotEqual(
             modified_post.text,
