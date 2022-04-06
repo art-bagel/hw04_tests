@@ -8,6 +8,7 @@ from yatube.settings import POSTS_PER_PAGE
 
 
 class PostViewTests(TestCase):
+
     @classmethod
     def setUpClass(cls):
         """Создаем двух авторов и две группы."""
@@ -174,6 +175,7 @@ class PostViewTests(TestCase):
 
 
 class PaginatorViewsTest(TestCase):
+
     @classmethod
     def setUpClass(cls):
         """Создаем автора и группу."""

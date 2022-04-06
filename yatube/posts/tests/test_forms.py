@@ -5,6 +5,7 @@ from posts.models import Group, Post, User
 
 
 class PostFormTests(TestCase):
+
     @classmethod
     def setUpClass(cls):
         """Создаем автора и две группы."""

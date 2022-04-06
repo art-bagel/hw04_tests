@@ -4,6 +4,7 @@ from posts.models import Group, Post, User
 
 
 class PostModelTest(TestCase):
+
     @classmethod
     def setUpClass(cls):
         """Создаем в базе данных тестового пользователя, пост и группу."""
