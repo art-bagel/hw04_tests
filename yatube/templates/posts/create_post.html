@@ -20,7 +20,7 @@
           </div>
           <div class="card-body">
             {% include 'includes/form_alert.html' %}
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
               {% csrf_token %}
               {% include 'includes/form_fields.html' %}
               <div class="d-flex justify-content-end">

@@ -64,7 +64,7 @@ def post_create(request: HttpRequest) -> HttpResponse:
         form = PostForm()
         return render(request, 'posts/create_post.html',
                       context={'form': form})
-    form = PostForm(request.POST)
+    form = PostForm(request.POST, files=request.FILES)
     if not form.is_valid():
         return render(request, 'posts/create_post.html',
                       context={'form': form})
@@ -84,7 +84,7 @@ def post_edit(request: HttpRequest, post_id: int) -> HttpResponse:
         form = PostForm(instance=post)
         return render(request, 'posts/create_post.html',
                       context={'form': form, 'is_edit': True})
-    form = PostForm(request.POST, instance=post)
+    form = PostForm(request.POST, files=request.FILES, instance=post)
     if form.is_valid():
         form.save()
         return redirect('posts:post_detail', post_id=post_id)

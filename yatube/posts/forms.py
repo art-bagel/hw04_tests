@@ -8,7 +8,7 @@ class PostForm(ModelForm):
     """Форма для создания и редактирования постов."""
     class Meta:
         model = Post
-        fields = ('text', 'group')
+        fields = ('text', 'group', 'image')
         widgets = {
             'text': Textarea(attrs={'cols': 80, 'rows': 10}),
         }
@@ -18,5 +18,6 @@ class PostForm(ModelForm):
         }
         help_texts = {
             'text': gettext_lazy('Текст нового поста'),
-            'group': gettext_lazy('Группа, к которой будет относиться пост')
+            'group': gettext_lazy('Группа, к которой будет относиться пост'),
+            'image': gettext_lazy('Выберите картинку к посту')
         }
