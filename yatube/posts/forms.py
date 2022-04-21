@@ -1,7 +1,6 @@
 from django.forms import ModelForm, Textarea
-from django.utils.translation import gettext_lazy
 
-from posts.models import Post
+from posts.models import Comment, Post
 
 
 class PostForm(ModelForm):
@@ -12,12 +11,13 @@ class PostForm(ModelForm):
         widgets = {
             'text': Textarea(attrs={'cols': 80, 'rows': 10}),
         }
-        labels = {
-            'text': gettext_lazy('Текст поста'),
-            'group': gettext_lazy('Выберите группу')
-        }
-        help_texts = {
-            'text': gettext_lazy('Текст нового поста'),
-            'group': gettext_lazy('Группа, к которой будет относиться пост'),
-            'image': gettext_lazy('Выберите картинку к посту')
+
+
+class CommentForm(ModelForm):
+    """Форма для создания комментария к посту."""
+    class Meta:
+        model = Comment
+        fields = ('text', )
+        widgets = {
+            'text': Textarea(attrs={'cols': 80, 'rows': 5})
         }

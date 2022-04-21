@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load cache %}
 {% block title %}
   Последние обновления на сайте
 {% endblock %}
 {% block content %}
-  <div class="container py-5">
-    <h1>Последние обновления на сайте</h1>
+  <h1>Последние обновления на сайте</h1>
+  {% cache 200 index_page page_obj.number%}
+    {% include 'posts/includes/switcher.html' with index=True %}
     {% for post in page_obj %}
       {% include 'posts/includes/post_card.html' with all_posts_user=True %}
       {% if post.group %}
@@ -16,6 +18,7 @@
         <hr>
       {% endif %}
     {% endfor %}
-  </div>
-  {% include 'posts/includes/paginator.html' %}
+    {% include 'posts/includes/paginator.html' %}
+  {% endcache %}
 {% endblock %}
+

@@ -29,13 +29,6 @@
             все посты пользователя
           </a>
         </li>
-        {% if request.user.username == post.author.username %}
-          <li class="list-group-item">
-            <a href="{% url 'posts:post_edit' post.id %}">
-             редактировать пост
-            </a>
-          </li>
-        {% endif %}
       </ul>
     </aside>
     <article class="col-12 col-md-9">
@@ -45,6 +38,38 @@
         {% endthumbnail %}
         {{ post.text }}
       </p>
+      {% if request.user.username == post.author.username %}
+        <a href="{% url 'posts:post_edit' post.id %}">
+          редактировать пост
+        </a>
+      {% endif %}
+      {% if request.user.is_authenticated %}
+        <div class="card my-4">
+          <h5 class="card-header">Добавить комментарий:</h5>
+          <div class="card-body">
+            {% include 'includes/form_alert.html' %}
+            <form method="post" action="{% url 'posts:add_comment' post.id %}">
+              {% csrf_token %}
+              {% include 'includes/form_fields.html' %}
+              <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+      <div class="media mb-4">
+        <div class="media-body">
+          {% for comment in comments %}
+            <h5 class="mt-0">
+              <a href="{% url 'posts:profile' comment.author.username %}">
+                {{ comment.author.username }}
+              </a>
+            </h5>
+            <p>
+              {{ comment.text }}
+            </p>
+          {% endfor %}
+        </div>
+      </div>
     </article>
   </div>
 {% endblock %}
